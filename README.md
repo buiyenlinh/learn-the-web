@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Học web</title>
 </head>
 <body>
 	<div>
