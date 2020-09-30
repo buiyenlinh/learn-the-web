@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find the answer</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+
+	<style type="text/css">
+		.title {
+			font-family: 'Pacifico', cursive;
+			text-transform: capitalize;
+			font-weight: bold;
+			background: pink;
+			padding: 15px;
+			margin: 0px;
+		}
+		.content {
+			background: pink;
+			height: 540px;
+			width: 100%;
+			border-top: 2px solid #17af17;
+			padding: 20px;
+		}
+		.question,
+		.code_color {
+			font-family: "Pacifico", cursive;
+			font-size: 25px;
+			height: 30px;
+			font-weight: bold;
+			text-transform: capitalize;
+			color: purple;
+			margin-bottom: 10px;
+		}
+		.answer {
+			padding: 20px 40px 0px 40px;
+		}
+		.answer ul {
+			list-style: none;
+			padding: 0px;
+			margin: 0px;
+		}
+		.answer ul li {
+			float: left;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.answer ul li div {
+			border: 1px solid #333;
+			border-radius: 30px;
+			padding: 20px 0px 60px 0px;	
+			font-family: "Pacifico", cursive;
+			font-size: 20px;
+			font-weight: bold;
+			text-transform: capitalize;
+			height: 20px;
+			color: yellow;
+		}
+		.change_question {
+			padding: 10px;
+			border: 2px solid #333;
+			font-family: "Pacifico", cursive;
+			font-size: 18px;
+			position: fixed;
+			top: 100px;
+			color: green;
+			right: 60px;
+			border-radius: 50px 0px 0px 50px;
+		}
+		.icon-right {
+			position: fixed;
+			font-size: 51px;
+			top: 100px;
+			right: 23px;
+		}
+		.img {
+			opacity: 0;
+			text-align: center;
+		}
+		.img img {
+			width: 100px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+<body>
+	<div class="">
+		<h1 class="text-center title">Find the answer</h1>
+		<div class="content">
+			<div class="text-center question">Choose a color that matches the code</div>
+			<div class="code_color text-center">Question????</div>
+			<div class="answer">
+				<ul class="list-color row">
+					<li class="color col-md-4">
+						<div></div>
+					</li>
+					<li class="color col-md-4">
+						<div></div>
+					</li>
+					<li class="color col-md-4">
+						<div></div>
+					</li>
+					<li class="color col-md-4">
+						<div></div>
+					</li>
+					<li class="color col-md-4">
+						<div></div>
+					</li>
+					<li class="color l col-md-4">
+						<div></div>
+					</li>
+				</ul>
+			</div>
+			<div class="img">
+				<img src="images/cat_cute.gif">
+				<img src="images/cat_cute.gif">
+				<img src="images/cat_cute.gif">
+			</div>
+			<div class="change_question" onclick="find_answer()">
+				Click to change the question	
+			</div>
+			<span class="glyphicon glyphicon-triangle-right icon-right"></span>
+			<div class="hidden"></div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  	<script type="text/javascript">
+  		function find_answer() {
+  			var color_list = document.querySelectorAll(".color div");
+
+	  		function random_color() {
+	  			var color = '#'+ Math.random().toString(16).substr(2,6);
+	  			return color;
+	  		}
+	  		var answer = random_color();
+	  		document.querySelector('.code_color').innerHTML = answer;
+
+	  		var num_answer = 0;
+	  		function random_number() {
+	  			num_answer = Math.floor(Math.random() * 6);
+	  		}
+			random_number();
+			
+	  		for (let i = 0; i < color_list.length; i++ ) {
+	  			color_list[i].innerHTML = "";
+	  			color_list[i].style.opacity = 1;
+	  			document.querySelector(".img").style.opacity = 0;
+	  			if(i == num_answer) {
+	  				color_list[i].style.background = answer;
+	  			} else {
+	  				var _color = random_color();
+	  				color_list[i].style.background = _color;
+	  			}
+	  		}
+	  		
+	  		for (let i = 0; i < color_list.length; i++) {
+	  			color_list[i].onclick = function() {
+	  				document.querySelector(".hidden").style.background = answer;
+	  				if(color_list[i].style.background == document.querySelector(".hidden").style.background) {
+	  					tt = true;
+	  					color_list[i].innerHTML = "Congratulations !!!";
+	  					document.querySelector(".img").style.opacity = 1;
+	  					
+	  				} else {
+	  					color_list[i].style.opacity = 0;
+	  				}
+	  			}
+	  		}
+  		}
+  	</script>
+</body>
+</html>
